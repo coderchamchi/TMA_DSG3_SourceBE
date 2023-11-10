@@ -1,1 +1,0 @@
-thực hiện git revert để test xem nó hoạt động thế nào 
