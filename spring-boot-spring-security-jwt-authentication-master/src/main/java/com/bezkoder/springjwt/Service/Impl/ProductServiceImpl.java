@@ -156,8 +156,9 @@ public class ProductServiceImpl implements ProductService {
                     product.setDiscount(productDTO.getDiscount());
                     product.setSize(productDTO.getSize());
                     product.setCategory(categoryid.get());
+                    class4getpicture getpicture = new class4getpicture();
                     try {
-                        String base64 = product.getbase64fromfolder(productDTO.getProductname());
+                        String base64 = getpicture.getbase64fromfolder2(productDTO.getProductname());
                         product.setBase64(base64);
                     } catch (IOException e) {
                         product.setBase64(null);
