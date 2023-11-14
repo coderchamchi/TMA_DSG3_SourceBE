@@ -41,6 +41,8 @@ public interface ProductService {
     //get product by category id
     ArrayList<Product> getproductbycategory(Long id);
 
+    ArrayList<Product> getproductbycategoryname(String query);
+
     //update by patch
     Product updatebypatch(long id, Map<String, Object> fields);
 

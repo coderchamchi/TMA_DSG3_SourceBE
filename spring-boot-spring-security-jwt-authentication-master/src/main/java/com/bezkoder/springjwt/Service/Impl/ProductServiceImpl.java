@@ -70,6 +70,7 @@ public class ProductServiceImpl implements ProductService {
     public ArrayList<Product> getProdcuctbyBrand(String query) {
         return productRepository.findProductbyBrand(query);}
 
+
 //    @Override
 //    public boolean saveProduct(ProductRequest productDTO) {
 //        if (ObjectUtils.isNotEmpty(productDTO)) {
@@ -182,8 +183,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public ArrayList<Product> getproductbycategoryname(String query) {
+        ArrayList<Product> products = productRepository.Productbycategoryname(query);
+        return products;
+    }
+
+    @Override
     public Product updatebypatch(long id, Map<String, Object> fields) {
-        Optional<Product> existingProduct = productRepository.findProductId(id);
+        Optional<Product> existingProduct = productRepository.findById(id);
 
         if(existingProduct.isPresent()){
         fields.forEach((key, value)->

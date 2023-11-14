@@ -16,6 +16,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.parameters.P;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -59,6 +60,18 @@ public class ProductController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    @GetMapping("/categoryname")
+    public ResponseEntity<ArrayList<Product>> getproductsbycategoryname(@RequestParam("query") String query){
+        try {
+            ArrayList<Product> products = productService.getproductbycategoryname(query);
+            return new ResponseEntity<>(products, HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    
 
     @GetMapping("/searchbyname")
     public ResponseEntity<ArrayList<Product>> getproductbyname(@RequestParam("query") String query){

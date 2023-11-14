@@ -30,7 +30,6 @@ public class BillController {
         return new ResponseEntity<List<Bill>>(listbill, HttpStatus.OK);
     }
     @PostMapping("/add")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<ResponseJson<Boolean>> saveBill(@RequestBody BillRequest billRequest)
     {
         if(ObjectUtils.isEmpty(billRequest)){
