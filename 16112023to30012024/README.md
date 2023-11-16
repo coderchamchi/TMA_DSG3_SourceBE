@@ -1,4 +1,4 @@
-# TMA_DSG3_SourceBE
+# Personal Project
 **This is source code BE for Project E-Commerce
 
 Frameworks and Tools
