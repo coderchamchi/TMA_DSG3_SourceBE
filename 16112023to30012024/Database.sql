@@ -1,3 +1,5 @@
+CREATE DATABASE ECommerce;
+use ECommerce;
 CREATE TABLE `Role` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(20)
@@ -34,18 +36,18 @@ CREATE TABLE `Product` (
   `deleted` int
 );
 
-CREATE TABLE `FeedBack` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `firstname` varchar(30),
-  `lastname` varchar(30),
-  `email` varchar(250),
-  `phone_number` varchar(20),
-  `subject_name` varchar(350),
-  `note` varchar(1000),
-  `status` int DEFAULT 0,
-  `created_at` datetime,
-  `updated_at` datetime
-);
+-- CREATE TABLE `FeedBack` (
+--   `id` int PRIMARY KEY AUTO_INCREMENT,
+--   `firstname` varchar(30),
+--   `lastname` varchar(30),
+--   `email` varchar(250),
+--   `phone_number` varchar(20),
+--   `subject_name` varchar(350),
+--   `note` varchar(1000),
+--   `status` int DEFAULT 0,
+--   `created_at` datetime,
+--   `updated_at` datetime
+-- );
 
 CREATE TABLE `Orders` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
