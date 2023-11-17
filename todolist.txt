@@ -1,4 +1,0 @@
-now --> 12pm 14/11
-have done DB --> done at 17/11
-have done module Shopping Cart 
-have done intergation
