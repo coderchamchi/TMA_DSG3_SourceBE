@@ -5,6 +5,12 @@ CREATE TABLE `Role` (
   `name` varchar(20)
 );
 
+CREATE TABLE `UserRole`(
+	`id` int PRIMARY KEY AUTO_INCREMENT,
+	`role_id` int,
+    `user_id` int
+);
+
 CREATE TABLE `User` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `fullname` varchar(50),
@@ -15,7 +21,7 @@ CREATE TABLE `User` (
   `role_id` int,
   `created_at` datetime,
   `updated_at` datetime,
-  `deleted` int
+  `deleted` boolean
 );
 
 CREATE TABLE `Category` (
@@ -29,11 +35,11 @@ CREATE TABLE `Product` (
   `title` varchar(250),
   `price` int,
   `discount` int,
-  `thumbnail` varchar(500),
+  `thumbnail` text,
   `description` longtext,
   `created_at` datetime,
   `updated_at` datetime,
-  `deleted` int
+  `deleted` boolean
 );
 
 -- CREATE TABLE `FeedBack` (
@@ -82,8 +88,6 @@ CREATE TABLE `address` (
   `phone_number` varchar(20)
 );
 
-ALTER TABLE `User` ADD FOREIGN KEY (`role_id`) REFERENCES `Role` (`id`);
-
 ALTER TABLE `Product` ADD FOREIGN KEY (`category_id`) REFERENCES `Category` (`id`);
 
 ALTER TABLE `Order_Details` ADD FOREIGN KEY (`product_id`) REFERENCES `Product` (`id`);
@@ -99,3 +103,7 @@ ALTER TABLE `ShoppingCart_Item` ADD FOREIGN KEY (`product_id`) REFERENCES `Produ
 ALTER TABLE `address` ADD FOREIGN KEY (`user_id`) REFERENCES `User` (`id`);
 
 ALTER TABLE `Orders` ADD FOREIGN KEY (`address_id`) REFERENCES `address` (`id`);
+
+ALTER TABLE `userrole` ADD FOREIGN KEY (`role_id`) REFERENCES `Role` (`id`);
+
+ALTER TABLE `userrole` ADD FOREIGN KEY (`user_id`) REFERENCES `User` (`id`);

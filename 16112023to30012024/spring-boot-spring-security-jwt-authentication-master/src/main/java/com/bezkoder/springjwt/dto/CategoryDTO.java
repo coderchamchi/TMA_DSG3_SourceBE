@@ -13,6 +13,4 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class CategoryDTO {
     private String categoryname;
-    private LocalDate createdate;
-    private LocalDate updatedate;
 }

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -19,53 +20,57 @@ import java.util.*;
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "userid")
+  @Column(name = "id")
   @JsonIgnore
   private Long userId;
 
-  @Column(name = "Username", nullable = false, unique = true)
+  @Column(name = "fullname", nullable = false, unique = true)
   private String username;
 
-  @Column(name = "Userpassword", nullable = false)
+  @Column(name = "password", nullable = false)
   @JsonIgnore
   private String password;
 
-  @Column(name = "Createdate")
+  @Column(name = "created_at")
   @JsonIgnore
   private LocalDate created;
 
-  @Column(name = "Updatedate")
+  @Column(name = "updated_at")
   @JsonIgnore
   private LocalDate updated;
 
-  @Column(name = "Email", nullable = false, unique = true)
+  @NaturalId
+  @Column(name = "email", nullable = false, unique = true)
   private String email;
 
-  @Column(name ="Phone")
+  @Column(name ="phone_number")
   private String phone;
 
-  @Column(name = "Address")
+  @Column(name = "address")
   private String address;
 
-  @Column(name = "Birthday")
+  @Column(name = "birthday")
   private LocalDate birthday;
 
+  @Column(name="deleted")
+  private boolean deleted;
+
   @ManyToMany(fetch = FetchType.LAZY) // lấy user thì lấy luôn quyền của nó
-  @JoinTable( name = "Userrole",
-          joinColumns = @JoinColumn(name = "Userid"),
-          inverseJoinColumns = @JoinColumn(name = "Roleid")
+  @JoinTable( name = "userrole",
+          joinColumns = @JoinColumn(name = "user_id"),
+          inverseJoinColumns = @JoinColumn(name = "role_id")
   )
   @JsonIgnore
   private Set<Role> listRole = new HashSet<>();
 
   @OneToMany(mappedBy = "user")
   @JsonIgnore
-  private List<Bill> listBill;
+  private List<ShoppingCartItem> shoppingCart = new ArrayList<>();
+  // =new Arraylist<>() là để tránh tình trạng null exception khi thao tác với class shoppingcartitem mà chưa khởi tạo
 
-//  @OneToOne(mappedBy = "customer")
-//  @JsonIgnore
-//  private ShoppingCart shoppingCart;
-
+  //  @OneToMany(mappedBy = "user")
+  //  @JsonIgnore
+  //  private List<Bill> listBill;
 
   public User(String username, String encode, String email,LocalDate birthday) {
     this.username = username;

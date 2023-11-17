@@ -20,17 +20,12 @@ import java.util.List;
 @Table(name = "category")
 public class Category {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long categoryid;
 
-    @Column(name = "Categoryname")
+    @Column(name = "name")
     private String categoryname;
-
-    @Column(name = "Createdate")
-    private LocalDate createdate;
-
-    @Column(name = "Updatedate")
-    private LocalDate updatedate;
 
     @OneToMany(mappedBy = "category")
     @JsonIgnore
