@@ -1,4 +1,12 @@
-now --> 12pm 14/11
-have done DB
-have done module Shopping Cart
-have done intergation
+--content is created at 13/11/2023
+{
+now --> 12pm 14/11.
+have done DB --> have done at 17/11.
+have done module Shopping Cart.
+have done intergation.
+}
+--content is created at 18/11/2023
+{
+20/11 --> have done create class and mapping its with new database.
+22/11 --> have done create interface, repo, service, etc.. related to new class, new project.
+}

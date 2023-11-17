@@ -2,6 +2,7 @@ package com.bezkoder.springjwt.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,6 +34,6 @@ public class Category {
     private LocalDate updatedate;
 
     @OneToMany(mappedBy = "category")
-    @JsonIgnore
+    @JsonManagedReference
     private List<Product> listProduct;
 }

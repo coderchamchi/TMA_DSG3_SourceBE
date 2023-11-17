@@ -1,5 +1,6 @@
 package com.bezkoder.springjwt.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -65,7 +66,7 @@ public class Product {
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "Categoryid")
-    @JsonIgnore
+    @JsonBackReference
     private Category category;
 
 //    @OneToMany(mappedBy = "product")
