@@ -31,4 +31,6 @@ public class ShoppingCartItem {
     // không muốn phải thực hiện thêm câu truy vấn.
     @JoinColumn(name = "User_id")
     private User user;
+
+
 }

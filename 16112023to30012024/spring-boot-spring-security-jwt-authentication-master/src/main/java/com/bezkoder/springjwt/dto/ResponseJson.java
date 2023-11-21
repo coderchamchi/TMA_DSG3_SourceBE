@@ -49,7 +49,7 @@ public class ResponseJson<T> implements Serializable {
         this.data = data;
     }
 
-    public ResponseJson(T data, HttpStatus status, String message) {
+    public  ResponseJson(T data, HttpStatus status, String message) {
         this.data = data;
         this.status = status;
         this.message = message;

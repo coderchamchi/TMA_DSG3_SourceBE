@@ -1,32 +1,63 @@
-//package com.bezkoder.springjwt.Service.Impl;
-//
-//import com.bezkoder.springjwt.Service.ShoppingCartService;
-//import com.bezkoder.springjwt.entities.CartItem;
-//import com.bezkoder.springjwt.entities.Product;
-//import com.bezkoder.springjwt.entities.ShoppingCart;
-//import com.bezkoder.springjwt.entities.User;
-//import com.bezkoder.springjwt.repository.CartItemRepository;
-//import com.bezkoder.springjwt.repository.ShoppingCartRepository;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
-//import org.springframework.util.ObjectUtils;
-//
-//import java.util.HashSet;
-//import java.util.List;
-//import java.util.Set;
-//@Service
-//public class ShoppingCartServiceImpl implements ShoppingCartService {
-//    @Autowired
-//    private CartItemRepository itemRepository;
-//
-//    @Autowired
-//    private ShoppingCartRepository cartRepository;
-//
-//    @Override
-//    public List<ShoppingCart> getallCart() {
-//        return cartRepository.findAll();
-//    }
-//
+package com.bezkoder.springjwt.Service.Impl;
+
+import com.bezkoder.springjwt.Service.ShoppingCartSItemervice;
+import com.bezkoder.springjwt.Service.UserService;
+import com.bezkoder.springjwt.constant.WebUnit;
+import com.bezkoder.springjwt.entities.Product;
+import com.bezkoder.springjwt.entities.ShoppingCartItem;
+import com.bezkoder.springjwt.entities.User;
+import com.bezkoder.springjwt.repository.ShoppingCartItemRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+@Service
+public class ShoppingCartServiceImpl implements ShoppingCartSItemervice {
+    @Autowired
+    private ShoppingCartItemRepository shoppingCartItemRepository;
+
+    @Autowired
+    UserService userService;
+
+    @Override
+    public List<ShoppingCartItem> getallCart(Long id) {
+        return shoppingCartItemRepository.finditeminshoppingcart(id);
+    }
+
+    @Override
+    public boolean Shoppingcartaftersignup(User user) {
+        ShoppingCartItem shoppingCartItem = new ShoppingCartItem();
+        if (ObjectUtils.isEmpty(user)){
+            return false;
+        }
+        shoppingCartItem.setUser(user);
+        shoppingCartItemRepository.save(shoppingCartItem);
+        return true;
+    }
+
+    @Override
+    public ShoppingCartItem addItemToCart(Product product, int quantity, User Customer) {
+        return null;
+    }
+
+    @Override
+    public ShoppingCartItem updateItemInCart(Product product, int quantity, User customer) {
+        return null;
+    }
+
+    @Override
+    public ShoppingCartItem deleteItemFromCart(Product product, User customer) {
+        return null;
+    }
+
+    @Override
+    public ShoppingCartItem findCartItem(Set<Product> cartItems, Long productId) {
+        return null;
+    }
+
 //    @Override
 //    public ShoppingCart addItemToCart(Product product, int quantity, User customer) {
 //        ShoppingCart cart = customer.getShoppingCart();
@@ -152,4 +183,4 @@
 //
 //        return totalPrice;
 //    }
-//}
+}

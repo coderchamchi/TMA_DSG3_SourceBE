@@ -13,21 +13,24 @@
 //@AllArgsConstructor
 //@NoArgsConstructor
 //@Entity
-//@Table(name = "bill")
+//@Table(name = "orders")
 //public class Bill {
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "Billid")
-//    private long billid;
+//    @Column(name = "id")
+//    private long orderId;
 //
-//    @Column(name = "Createdate")
-//    private LocalDate createdate;
+//    @Column(name = "order_date")
+//    private LocalDate createdAt;
 //
-//    @Column(name = "Updatedate")
-//    private LocalDate updatedate;
+//    @Column(name = "address_id")
+//    private LocalDate address;
 //
-//    @Column(name="Total")
+//    @Column(name="total_money")
 //    private int total;
+//
+//    @Column(name="status")
+//    private boolean status;
 //
 ////    @OneToMany(mappedBy = "bill")
 ////    @JsonIgnore
