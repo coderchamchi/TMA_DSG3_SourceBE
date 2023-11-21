@@ -1,4 +1,5 @@
 package com.bezkoder.springjwt.entities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,7 @@ public class ShoppingCartItem {
     // Điều này có thể làm tăng hiệu suất khi thường xuyên sử dụng thông tin của User liên quan và
     // không muốn phải thực hiện thêm câu truy vấn.
     @JoinColumn(name = "User_id")
+    @JsonIgnore
     private User user;
 
 

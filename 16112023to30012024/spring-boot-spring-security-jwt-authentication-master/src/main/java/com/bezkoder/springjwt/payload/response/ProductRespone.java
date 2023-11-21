@@ -1,10 +1,17 @@
 package com.bezkoder.springjwt.payload.response;
 
+import com.bezkoder.springjwt.entities.Category;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
 @Getter
@@ -16,25 +23,21 @@ public class ProductRespone {
 
     private int price;
 
-    private String material;
+    private String description;
 
-    private String brand;
+    private LocalDate created_at;
 
-    private String madein;
+    private LocalDate updated_at;
 
     private int warehouse;
-
-    private String descriptionproduct;
-
-    private LocalDate createdate;
-
-    private LocalDate updatedate;
 
     private int discount;
 
     private int size;
 
     private String base64;
+
+    private boolean deleted;
 
     private String category;
 

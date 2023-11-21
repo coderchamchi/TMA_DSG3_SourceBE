@@ -1,5 +1,6 @@
 package com.bezkoder.springjwt.Service;
 
+import com.bezkoder.springjwt.dto.itemDTO;
 import com.bezkoder.springjwt.entities.Product;
 import com.bezkoder.springjwt.entities.ShoppingCartItem;
 import com.bezkoder.springjwt.entities.User;
@@ -11,7 +12,7 @@ public interface ShoppingCartSItemervice {
     List<ShoppingCartItem> getallCart(Long id);
 
     boolean Shoppingcartaftersignup(User user);
-    ShoppingCartItem addItemToCart(Product product, int quantity, User Customer);
+    boolean addItemToCart(itemDTO itemDTO, User user);
 
     ShoppingCartItem updateItemInCart(Product product, int quantity, User customer);
 

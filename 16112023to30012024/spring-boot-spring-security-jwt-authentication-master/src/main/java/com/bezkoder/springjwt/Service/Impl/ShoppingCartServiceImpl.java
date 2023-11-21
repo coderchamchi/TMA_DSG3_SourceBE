@@ -1,11 +1,14 @@
 package com.bezkoder.springjwt.Service.Impl;
 
+import com.bezkoder.springjwt.Service.ProductService;
 import com.bezkoder.springjwt.Service.ShoppingCartSItemervice;
 import com.bezkoder.springjwt.Service.UserService;
 import com.bezkoder.springjwt.constant.WebUnit;
+import com.bezkoder.springjwt.dto.itemDTO;
 import com.bezkoder.springjwt.entities.Product;
 import com.bezkoder.springjwt.entities.ShoppingCartItem;
 import com.bezkoder.springjwt.entities.User;
+import com.bezkoder.springjwt.repository.ProductRepository;
 import com.bezkoder.springjwt.repository.ShoppingCartItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +16,7 @@ import org.springframework.util.ObjectUtils;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartSItemervice {
@@ -22,9 +26,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartSItemervice {
     @Autowired
     UserService userService;
 
+    @Autowired
+    ProductRepository productRepository;
+
     @Override
     public List<ShoppingCartItem> getallCart(Long id) {
-        return shoppingCartItemRepository.finditeminshoppingcart(id);
+        return shoppingCartItemRepository.FindAll(id);
     }
 
     @Override
@@ -39,8 +46,18 @@ public class ShoppingCartServiceImpl implements ShoppingCartSItemervice {
     }
 
     @Override
-    public ShoppingCartItem addItemToCart(Product product, int quantity, User Customer) {
-        return null;
+    public boolean addItemToCart(itemDTO itemDTO, User user) {
+        Optional<Product> product = productRepository.findById(itemDTO.getProduct());
+        if (ObjectUtils.isEmpty(product))
+        {
+            return false;
+        }
+        ShoppingCartItem shoppingCartItem = new ShoppingCartItem();
+        shoppingCartItem.setUser(user);
+        shoppingCartItem.setProduct(product.get());
+        shoppingCartItem.setQuantity(itemDTO.getQuantity());
+        shoppingCartItemRepository.save(shoppingCartItem);
+        return true;
     }
 
     @Override

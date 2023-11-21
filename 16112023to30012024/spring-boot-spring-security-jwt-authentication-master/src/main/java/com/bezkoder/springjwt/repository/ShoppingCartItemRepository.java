@@ -12,10 +12,8 @@ import java.util.ArrayList;
 
 public interface ShoppingCartItemRepository extends JpaRepository<ShoppingCartItem, Long> {
     @Query(
-            value = "SELECT * FROM shoppingcart_item s WHERE s.id = :id",
+            value = "SELECT * FROM shoppingcart_item s WHERE s.user_id = :id and product_id != 'null'",
             nativeQuery = true)
-    ArrayList<ShoppingCartItem> finditeminshoppingcart(Long id);
+    ArrayList<ShoppingCartItem> FindAll(Long id);
 
-//    @Query(value = "INSERT INTO shoppingcart_item (user_id) VALUES (:userId)", nativeQuery = true)
-//    void addItemAfterSignup(@Param("userId") Long userId);
 }

@@ -12,6 +12,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class itemDTO {
-    private Product product;
+    private long product;
     private int quantity;
 }

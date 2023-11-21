@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -14,19 +15,13 @@ public class ProductRequest {
 
     private int price;
 
-    private String material;
+    private String description;
 
-    private String brand;
+    private LocalDate created_at;
 
-    private String madein;
+    private LocalDate updated_at;
 
     private int warehouse;
-
-    private String descriptionproduct;
-
-    private String createdate;
-
-    private String updatedate;
 
     private int discount;
 
@@ -34,6 +29,9 @@ public class ProductRequest {
 
     private String base64;
 
-    private long categoryid;
+    private boolean deleted;
+
+    private long category;
+
 }
 
