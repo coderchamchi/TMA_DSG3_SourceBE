@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import com.bezkoder.springjwt.Service.Impl.UserDetailsServiceImpl;
 import com.bezkoder.springjwt.Service.RoleService;
 import com.bezkoder.springjwt.Service.UserService;
+import com.bezkoder.springjwt.config.WebSecurityConfiguration;
 import com.bezkoder.springjwt.dto.ResponseJson;
 import com.bezkoder.springjwt.dto.UserDTO;
 import com.bezkoder.springjwt.repository.UserRepository;
@@ -20,8 +21,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import com.bezkoder.springjwt.entities.ERole;
@@ -63,6 +66,16 @@ public class AuthController {
 public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest)
 {
   try {
+    // Lấy thông tin người dùng từ cơ sở dữ liệu
+    UserDetails user = userDetailsService.loadUserByUsername(loginRequest.getEmail());
+    if(ObjectUtils.isEmpty(user)){
+      return ResponseEntity.ok().body(new ResponseJson<>(Boolean.FALSE, HttpStatus.BAD_REQUEST, "User Not Found"));
+    }
+    // Kiểm tra mật khẩu đã nhập với mật khẩu đã mã hóa trong cơ sở dữ liệu
+    if (!encoder.matches(loginRequest.getPassword(), user.getPassword())) {
+      return ResponseEntity.ok().body(new ResponseJson<>(Boolean.FALSE, HttpStatus.BAD_REQUEST, "User Not Found, Password Wrong!"));
+    }
+    // ok hết rồi thì mình lấy thông tin để tạo ra JWT, tiện cho việc đăng nhập
     Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 
