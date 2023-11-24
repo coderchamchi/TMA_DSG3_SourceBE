@@ -17,8 +17,8 @@ import com.bezkoder.springjwt.config.jwt.AuthTokenFilter;
 import com.bezkoder.springjwt.Service.Impl.UserDetailsServiceImpl;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@Configuration
-@EnableWebSecurity
+@Configuration // Class được đánh dấu annotaiton này được Spring Container sử dụng làm nguồn định nghĩa bean.
+@EnableWebSecurity //annotation cơ bản của Spring Security để kích hoạt tính năng bảo mật trên ứng dụng web.
 @EnableGlobalMethodSecurity(
         prePostEnabled = true,
         securedEnabled = true,
@@ -55,16 +55,18 @@ public class WebSecurityConfiguration {
     return new BCryptPasswordEncoder();
   }
 
-    @Bean
-  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.httpBasic().disable().cors()
+  @Bean
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception { //Phương thức filterChain cấu hình các quy tắc bảo mật cho ứng dụng.
+      http.httpBasic().disable().cors()
             .and().formLogin().disable()
             .csrf().disable()
-            .exceptionHandling()
+            .exceptionHandling() //Cấu hình xử lý ngoại lệ cho các trường hợp xác thực thất bại hoặc quyền truy cập bị từ chối.
             .authenticationEntryPoint(authenticationEntryPointJwt)
             .accessDeniedHandler(customAccessDeniedHandler)
             .and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+              //chỗ này là cấu hình quản lí phiên nhưng mà mình không muốn sử dụng session và sẽ không lưu trữ thông tin xác thực ở phía máy chủ
+              //nên để là SessionCreationPolicy.stateless
             .and()
             .authorizeRequests()
             .antMatchers("/api/auth/**").permitAll()
@@ -73,7 +75,7 @@ public class WebSecurityConfiguration {
             .antMatchers("/ProjectSJ/Bill/**").permitAll()
             .anyRequest().authenticated()
             .and()
-            .addFilterAfter(authenticationJwtTokenFilter(),
+            .addFilterAfter(authenticationJwtTokenFilter(), //có nhiệm vụ kiểm tra và xác thực token JWT trong các yêu cầu.
                     UsernamePasswordAuthenticationFilter.class);
 
     return http.build();

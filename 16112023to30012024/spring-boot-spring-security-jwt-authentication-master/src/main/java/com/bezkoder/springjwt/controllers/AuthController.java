@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import com.bezkoder.springjwt.Service.Impl.UserDetailsServiceImpl;
 import com.bezkoder.springjwt.Service.RoleService;
 import com.bezkoder.springjwt.Service.UserService;
-import com.bezkoder.springjwt.config.WebSecurityConfiguration;
+
 import com.bezkoder.springjwt.dto.ResponseJson;
 import com.bezkoder.springjwt.dto.UserDTO;
 import com.bezkoder.springjwt.repository.UserRepository;

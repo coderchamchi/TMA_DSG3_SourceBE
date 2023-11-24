@@ -1,12 +1,9 @@
 package com.bezkoder.springjwt.dto;
 
-
-
 import com.bezkoder.springjwt.exception.SysError;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.http.HttpStatus;
-
 import java.io.Serializable;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
