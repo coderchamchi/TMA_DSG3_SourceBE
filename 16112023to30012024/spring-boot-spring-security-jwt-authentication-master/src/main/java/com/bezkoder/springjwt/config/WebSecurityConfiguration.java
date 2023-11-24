@@ -56,13 +56,15 @@ public class WebSecurityConfiguration {
   }
 
   @Bean
-  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception { //Phương thức filterChain cấu hình các quy tắc bảo mật cho ứng dụng.
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {//Phương thức filterChain cấu hình các quy tắc bảo mật cho ứng dụng.
       http.httpBasic().disable().cors()
             .and().formLogin().disable()
             .csrf().disable()
             .exceptionHandling() //Cấu hình xử lý ngoại lệ cho các trường hợp xác thực thất bại hoặc quyền truy cập bị từ chối.
             .authenticationEntryPoint(authenticationEntryPointJwt)
+              //xử lý và trả về thông điệp lỗi khi một yêu cầu yêu cầu xác thực và người dùng chưa được xác thực.
             .accessDeniedHandler(customAccessDeniedHandler)
+              // xử lí, ghi log khi user cố gắng truy cấp vào nguồn tài nguyên mà không đủ quyền
             .and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
               //chỗ này là cấu hình quản lí phiên nhưng mà mình không muốn sử dụng session và sẽ không lưu trữ thông tin xác thực ở phía máy chủ
